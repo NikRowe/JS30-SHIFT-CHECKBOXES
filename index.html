@@ -119,19 +119,30 @@
           if (inBetween) {
             checkbox.checked = true;
           }
+          if (checkbox.checked) {
+            const item = checkbox.parentNode
+            checkboxesElem.appendChild(item)
+          }
         })
-      }
-
-      if (this.checked) {
+      } else if (this.checked) {
         const item = this.parentNode
-        checkboxesElem.appendChild(item)
+        const toBottom = () => checkboxesElem.appendChild(item)
+        setTimeout(toBottom, 1200)
       }
 
       lastChecked = this;
     }
 
+    // checkboxes.forEach(checkbox => {
+    //   if (checkbox.checked) {
+    //     const item = checkbox.parentNode
+    //     checkboxesElem.appendChild(item)
+    //   }
+    //   console.log(checkbox)
+    // })
+
     checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
-    console.table(checkboxes)
+
 
   </script>
 </body>
