@@ -57,8 +57,8 @@
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
 
   -->
-  <div class="inbox">
-    <div class="item">
+  <div class="inbox" id="inbox">
+    <div class="item first">
       <input type="checkbox">
       <p>This is an inbox layout.</p>
     </div>
@@ -90,7 +90,7 @@
       <input type="checkbox">
       <p>Good Luck!</p>
     </div>
-    <div class="item">
+    <div class="item last">
       <input type="checkbox">
       <p>Don't forget to tweet your result!</p>
     </div>
@@ -99,8 +99,12 @@
   <script>
 
     const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]') // grabs the check boxes //
+    const checkboxesArr = Array.from(checkboxes)
+    const checkboxesElem = document.getElementById('inbox')
 
     let lastChecked;
+    let firstChild = (checkboxesElem.firstElementChild)
+    let lastChild = (checkboxesElem.lastElementChild)
 
     function handleCheck(e) {
       let inBetween = false;
@@ -117,10 +121,17 @@
           }
         })
       }
+
+      if (this.checked) {
+        const item = this.parentNode
+        checkboxesElem.appendChild(item)
+      }
+
       lastChecked = this;
     }
 
     checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
+    console.table(checkboxes)
 
   </script>
 </body>
